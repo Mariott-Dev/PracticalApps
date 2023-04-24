@@ -1,0 +1,48 @@
+﻿@using Packt.Shared
+@model QueryIndexViewModel
+@{
+    ViewData["Title"] = "Query Page";
+
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome to Internal & Extrenal Queries</h1>
+
+    <p class="alert alert-primary">@DateTime.Now.ToLongTimeString()</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Northwind</h1>
+
+        <hr/>
+        <h3>Query customers from a service</h3>
+        <form asp-action="Customers" method="get">
+            <input name="country" placeholder="Enter a country" />
+            <input type="submit" />
+        </form>
+        <hr/>
+        <h3>Query products by price</h3>
+        <form asp-action="ProductsThatCostMoreThan" method="GET">
+            <input name="price" placeholder="Enter a product price" />
+            <input type="submit" />
+        </form>
+        <hr/>
+        @if (Model is not null)
+        {
+            <h2>Products</h2>
+            <div id="product-columns">
+                <ul>
+                    @foreach (Product p in @Model.Products)
+                    {
+                        <li>
+                            <a asp-controller="Query" asp-action="ProductDetail" asp-route-id="@p.ProductId">
+                                @p.ProductName costs
+                                @(p.UnitPrice is null ? "zero" : p.UnitPrice.Value.ToString("C"))
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
