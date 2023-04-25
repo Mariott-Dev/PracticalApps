@@ -16,7 +16,8 @@ public partial class CustomersListPage : ContentPage
         {
             HttpClient client = new()
             {
-                BaseAddress = new Uri("http://10.0.2.2:5008")   // ip = 192.168.2.3 
+                // ipconfig = 192.168.2.3, localhost = 127.0.0.1, emulator = 10.0.2.2
+                BaseAddress = new Uri("http://10.0.2.2:5008")  
             };
 
             client.DefaultRequestHeaders.Accept.Add(
